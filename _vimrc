@@ -4,6 +4,7 @@ set nocompatible
 " 画面表示の設定
 
 set number         " 行番号を表示する
+
 set cursorline     " カーソル行の背景色を変える
 set cursorcolumn   " カーソル位置のカラムの背景色を変える
 set laststatus=2   " ステータス行を常に表示
@@ -110,3 +111,7 @@ if !isdirectory(s:dein_repo_dir)
     call dein#install(['vimproc'])
   endif
   " }}}
+
+colorscheme molokai     " 
+set t_Co=256
+syntax on
