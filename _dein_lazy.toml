@@ -12,9 +12,6 @@ on_i = 1
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'tomasr/molokai'
-
-[[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
 
 [[plugins]]

@@ -64,3 +64,7 @@ setopt share_history # share command history data
 #
 autoload -U compinit
 compinit
+
+## neovim configuration
+#
+export XDG_CONFIG_HOME=~/.config

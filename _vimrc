@@ -112,6 +112,6 @@ if !isdirectory(s:dein_repo_dir)
   endif
   " }}}
 
-colorscheme molokai     " 
+colorscheme desert     " 
 set t_Co=256
 syntax on
