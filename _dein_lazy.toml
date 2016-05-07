@@ -6,6 +6,7 @@ on_ft = ['snippet']
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+if = 'has("lua")'
 on_i = 1
 
 [[plugins]]
@@ -19,7 +20,9 @@ repo = 'tpope/vim-fugitive.vim'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
+on_i = 1
 
 [[plugins]]
-repo = 'ujihisa/unite-colorscheme.vimup'
+repo = 'ujihisa/unite-colorscheme'
+on_source = ['unite.vim']
 
