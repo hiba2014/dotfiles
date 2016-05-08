@@ -110,11 +110,16 @@ if !isdirectory(s:dein_repo_dir)
   if dein#check_install(['vimproc'])
     call dein#install(['vimproc'])
   endif
+
+" その他インストールしていないものはこちらに入れる
+  if dein#check_install()
+    call dein#install()
+  endif
   " }}}
 
 colorscheme badwolf
-set t_Co=256
-syntax on
+"set t_Co=256
+"syntax on
 
 """"""""""""""""""""""""""""""
 "Unite.vimの設定
@@ -139,5 +144,6 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 """"""""""""""""""""""""""""""
+
 
 

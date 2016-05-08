@@ -16,7 +16,7 @@ repo = 'itchyny/lightline.vim'
 repo = 'nathanaelkane/vim-indent-guides'
 
 [[plugins]]
-repo = 'tpope/vim-fugitive.vim'
+repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
