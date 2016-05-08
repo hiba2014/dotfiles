@@ -10,6 +10,7 @@ set cursorcolumn   " カーソル位置のカラムの背景色を変える
 set laststatus=2   " ステータス行を常に表示
 set cmdheight=2    " メッセージ表示欄を2行確保
 set showmatch      " 対応する括弧を強調表示
+set matchtime=1    " 
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
@@ -117,9 +118,10 @@ if !isdirectory(s:dein_repo_dir)
   endif
   " }}}
 
-colorscheme badwolf
-"set t_Co=256
-"syntax on
+"colorscheme badwolf
+colorscheme CandyPaper
+set t_Co=256
+syntax on
 
 """"""""""""""""""""""""""""""
 "Unite.vimの設定

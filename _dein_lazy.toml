@@ -26,3 +26,5 @@ on_i = 1
 repo = 'ujihisa/unite-colorscheme'
 on_source = ['unite.vim']
 
+[[plugins]]
+repo = 'Shougo/neomru.vim'
