@@ -118,8 +118,31 @@ if !isdirectory(s:dein_repo_dir)
   endif
   " }}}
 
+"colorscheme CandyPaper
+"colorscheme af
 "colorscheme badwolf
-colorscheme CandyPaper
+"colorscheme blazer
+"colorscheme burnntoast256
+"colorscheme darkZ
+"colorscheme darkblack
+colorscheme desert256
+"colorscheme ego
+"colorscheme elda
+"colorscheme gotham256
+"colorscheme gruvbox
+"colorscheme kruby
+"colorscheme lettuce
+"colorscheme mojave
+"colorscheme neverness
+"colorscheme pf_earth
+"colorscheme prmths
+"colorscheme skittles_berry
+"colorscheme up
+"colorscheme wombat256i
+                     
+                      
+
+
 set t_Co=256
 syntax on
 
