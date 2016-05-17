@@ -15,7 +15,8 @@ set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 " 不可視文字の表示記号指定
 "set listchars=tab:?\ ,eol:?,extends:?,precedes:?
-set listchars=tab:≫-,trail:-,eol:~,extends:≫,precedes:≪,nbsp:%
+"set listchars=tab:≫-,trail:-,eol:~,extends:≫,precedes:≪,nbsp:%
+set listchars=tab:^\ ,eol:~
 " カーソル移動関連の設定
 
 set backspace=indent,eol,start " backspaceキーの影響範囲に制限を設けない
@@ -45,7 +46,7 @@ set gdefault   " 置換の時 g オプションをデフォルトで有効にす
 
 " タブ/インデントの設定
 
-set expandtab     " タブ入力を複数の空白入力に置き換える
+"set expandtab     " タブ入力を複数の空白入力に置き換える
 set tabstop=4     " 画面上でタブ文字が占める幅
 set shiftwidth=4  " 自動インデントでずれる幅
 set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
@@ -170,5 +171,157 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"neocomplete の設定
+""""""""""""""""""""""""""""""
 
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+	\ 'default' : '',
+	\ 'vimshell' : $HOME.'/.vimshell_hist',
+	\ 'scheme' : $HOME.'/.gosh_completions'
+\ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+" For no inserting <CR> key.
+"return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+	let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+""""""""""""""""""""""""""""""
+"lightline の設定
+
+""""""""""""""""""""""""""""""
+"NICE EXAMPLES					*lightline-nice-examples*
+
+"A nice example for non-patched font users.
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'active': {
+		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+			\ },
+	\ 'component_function': {
+		\   'fugitive': 'LightLineFugitive',
+		\   'filename': 'LightLineFilename'
+			\ }
+	\ }
+
+function! LightLineModified()
+	return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+	return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightLineFilename()
+	return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+	\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+			\  &ft == 'unite' ? unite#get_status_string() :
+			\  &ft == 'vimshell' ? vimshell#get_status_string() :
+			\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+	\ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+	if &ft !~? 'vimfiler' && exists('*fugitive#head')
+		return fugitive#head()
+	endif
+	return ''
+endfunction
+
+"A nice example for |vim-powerline| font users:
+
+	let g:lightline = {
+		\ 'colorscheme': 'wombat',
+		\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+				\ },
+		\ 'component_function': {
+			\   'fugitive': 'LightLineFugitive',
+			\   'filename': 'LightLineFilename'
+				\ },
+		\ 'separator': { 'left': '?', 'right': '?' },
+		\ 'subseparator': { 'left': '?', 'right': '?' }
+		\ }
+function! LightLineModified()
+	return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+	return &ft !~? 'help\|vimfiler' && &readonly ? '?' : ''
+endfunction
+
+function! LightLineFilename()
+	return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+	\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+			\  &ft == 'unite' ? unite#get_status_string() :
+			\  &ft == 'vimshell' ? vimshell#get_status_string() :
+			\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+	\ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+	if &ft !~? 'vimfiler' && exists('*fugitive#head')
+	let branch = fugitive#head()
+	return branch !=# '' ? '? '.branch : ''
+	endif
+	return ''
+endfunction
