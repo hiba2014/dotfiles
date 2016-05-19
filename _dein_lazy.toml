@@ -1,14 +1,11 @@
 [[plugins]]
-repo = 'Shougo/neomru.vim'
-
-[[plugins]]
 repo = 'Shougo/neosnippet.vim'
 on_i = 1
 on_ft = ['snippet']
+depends = ['neosnippet-snippets']
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-depends = ['neosnippet']
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
@@ -27,6 +24,10 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'Shougo/unite.vim'
 on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
 
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
