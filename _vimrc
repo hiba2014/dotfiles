@@ -123,10 +123,11 @@ if !isdirectory(s:dein_repo_dir)
 "colorscheme af
 "colorscheme badwolf
 "colorscheme blazer
-"colorscheme burnntoast256
+colorscheme burnntoast256
 "colorscheme darkZ
 "colorscheme darkblack
-colorscheme desert256
+"colorscheme desert256
+"colorscheme molokai_dark
 "colorscheme ego
 "colorscheme elda
 "colorscheme gotham256
@@ -325,3 +326,24 @@ function! LightLineFugitive()
 	endif
 	return ''
 endfunction
+""""""""""""""""""""""""""""""
+"neosnippet の設定
+
+""""""""""""""""""""""""""""""
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+ 
+ " SuperTab like snippets behavior.
+ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)"
+ \: pumvisible() ? "\<C-n>" : "\<TAB>"
+ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)"
+ \: "\<TAB>"
+  
+  " For snippet_complete marker.
+if has('conceal')
+	    set conceallevel=2 concealcursor=i
+endif
