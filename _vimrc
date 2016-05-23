@@ -120,32 +120,36 @@ if !isdirectory(s:dein_repo_dir)
   " }}}
 
 "colorscheme CandyPaper
-"colorscheme af
+"colorscheme hybrid_material
+"colorscheme lucius
+"colorscheme Chasing_Logic
+"colorscheme pf_earth
+"colorscheme candycode
+"colorscheme colorer
 "colorscheme badwolf
-"colorscheme blazer
-colorscheme burnntoast256
-"colorscheme darkZ
-"colorscheme darkblack
+"colorscheme burnttoast256
 "colorscheme desert256
 "colorscheme molokai_dark
-"colorscheme ego
+colorscheme ego
 "colorscheme elda
 "colorscheme gotham256
-"colorscheme gruvbox
-"colorscheme kruby
 "colorscheme lettuce
-"colorscheme mojave
 "colorscheme neverness
-"colorscheme pf_earth
 "colorscheme prmths
 "colorscheme skittles_berry
 "colorscheme up
 "colorscheme wombat256i
+" ---------------------------
+"colorscheme mojave
+"colorscheme af
+"colorscheme gruvbox
+"colorscheme blazer
+"colorscheme kruby
                      
                       
 
 
-set t_Co=256
+"set t_Co=256
 syntax on
 
 """"""""""""""""""""""""""""""
